@@ -1,17 +1,26 @@
 import axios from 'axios';
+import { useEffect, useState} from 'react';
 import { Header } from '../components/header';
-import { products } from '../../starting-code/data/products';
+
 import './Homepage.css';
 
 
 
 
 export function HomePage() {
+    const[products, setProducts] = useState([]);
 
-    axios.get('http://localhost:3000/api/products')
-        .then((response) => {
-            console.log(response.data);
-        });
+
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/products')
+            .then((response) => {
+               setProducts(response.data);
+            });
+
+    }, []); 
+
+
 
 
     return (
@@ -43,7 +52,7 @@ export function HomePage() {
                                 </div>
 
                                 <div className="product-price">
-                                    {(product.priceCents / 100).toFixed(2) }
+                                    {(product.priceCents / 100).toFixed(2)}
                                 </div>
 
                                 <div className="product-quantity-container">
