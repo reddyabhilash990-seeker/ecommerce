@@ -9,6 +9,7 @@ import './Homepage.css';
 
 export function HomePage() {
     const[products, setProducts] = useState([]);
+    const[cart, setCart] = useState([]);
 
 
 
@@ -17,6 +18,13 @@ export function HomePage() {
             .then((response) => {
                setProducts(response.data);
             });
+
+        axios.get('http://localhost:3000/api/cart-items')
+            .then((response) => {
+                setCart(response.data);
+                
+            })    
+
 
     }, []); 
 
@@ -27,7 +35,7 @@ export function HomePage() {
 
         <>
 
-            <Header />
+            <Header cart={cart}/>
             <title>Ecommerce Project</title>
             <div className="home-page">
                 <div className="products-grid">
