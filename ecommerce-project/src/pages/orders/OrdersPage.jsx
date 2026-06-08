@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState, useEffect,  } from 'react';
 import dayjs from 'dayjs';
-import { Header } from '../components/header';
-import { formatMoney } from '../utils/money';
+import { Header } from '../../components/header';
+import { formatMoney } from '../../utils/money';
 import './OrderPage.css';
 
 
@@ -54,7 +54,7 @@ export function OrdersPage({ cart }) {
                                 <div className="order-details-grid">
                                     {order.products.map((orderProduct) => {
                                         return (
-                                            <div className="order-product" key={orderProduct.product.id}>
+                                            <div className="order-detail-grid" key={orderProduct.product.id}>
                                                 <div className="product-image-container">
                                                     <img src={orderProduct.product.image} />
                                                 </div>
