@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { formatMoney } from '../../utils/money';
 import { DeliveryOptions } from './DeliveryOptions';
+import axios from 'axios';
 
 
 
@@ -12,6 +13,24 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
                     return deliveryOption.id === cartItem.deliveryOptionId;
 
                 });
+
+                const deleteCartItem = async () => {
+                    await axios.delete(`/api/cart-items/${cartItem.productId}`);
+                    await loadCart();
+
+
+                }
+                const updateCartItemquantity = async () => {
+                    const newQuantity = prompt('Enter new quantity:', cartItem.quantity);
+                    if (newQuantity !== null) {
+                        await axios.put(`/api/cart-items/${cartItem.productId}`, {
+                            quantity: parseInt(newQuantity)
+                        });
+                        await loadCart();
+                    }
+                    
+                
+                }
                 return (
                     <div key={cartItem.productId} className="cart-item-container">
                         <div className="delivery-date">
@@ -34,10 +53,10 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
                                     <span>
                                         Quantity: <span className="quantity-label">{cartItem.quantity}</span>
                                     </span>
-                                    <span className="update-quantity-link link-primary">
+                                    <span className="update-quantity-link link-primary" onClick={updateCartItemquantity}>
                                         Update
                                     </span>
-                                    <span className="delete-quantity-link link-primary">
+                                    <span className="delete-quantity-link link-primary" onClick={deleteCartItem}>
                                         Delete
                                     </span>
                                 </div>
