@@ -11,7 +11,7 @@ export function OrdersPage({ cart, loadCart }) {
 
     useEffect(() => {
         const fetchOrders = async () => {
-            const response = await axios.get('/api/orders?expand=products');
+            const response = await axios.get('https://ecommerce-r441.onrender.com/api/orders?expand=products');
             setOrders(response.data);
 
         }
@@ -59,7 +59,7 @@ export function OrdersPage({ cart, loadCart }) {
                                     {order.products.map((orderProduct) => {
 
                                         const addToCart = async () => {
-                                            await axios.post('/api/cart-items', {
+                                            await axios.post('https://ecommerce-r441.onrender.com/api/cart-items', {
                                                 productId: orderProduct.product.id,
                                                 quantity: 1
                                             });

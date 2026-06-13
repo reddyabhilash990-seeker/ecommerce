@@ -17,7 +17,7 @@ export function CheckoutPage({ cart, loadCart }) {
             setDeliveryOptions(response.data);
 
 
-            response = await axios.get('/api/payment-summary');
+            response = await axios.get('https://ecommerce-r441.onrender.com/api/payment-summary');
             setPaymentSummary(response.data);
         };
         fetchCheckoutData();
