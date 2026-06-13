@@ -15,7 +15,7 @@ export function CheckoutPage({ cart, loadCart }) {
                 '/api/delivery-options?expand=estimatedDeliveryTime'
             );
             setDeliveryOptions(response.data);
-                
+
 
             response = await axios.get('/api/payment-summary');
             setPaymentSummary(response.data);
@@ -41,8 +41,11 @@ export function CheckoutPage({ cart, loadCart }) {
                     </div>
 
                     <div className="checkout-header-middle-section">
-                        Checkout (<a className="return-to-home-link"
-                            href="/">3 items</a>)
+                        Checkout (
+                        <a className="return-to-home-link" href="/">
+                            {cart.length} items
+                        </a>
+                        )
                     </div>
 
                     <div className="checkout-header-right-section">

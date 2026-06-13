@@ -1,4 +1,4 @@
-import { formatMoney } from '../../utils/money';
+
 import axios from 'axios';
 import {useNavigate} from 'react-router';
 
@@ -25,33 +25,36 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
                     <div className="payment-summary-row">
                         <div>Items ({paymentSummary.totalItems}):</div>
                         <div className="payment-summary-money">
-                            {formatMoney(paymentSummary.productCostCents)}
+                            ₹ {((paymentSummary.productCostCents / 100) * 83).toFixed(2)}
                         </div>
                     </div>
 
                     <div className="payment-summary-row">
                         <div>Shipping &amp; handling:</div>
                         <div className="payment-summary-money">
-                            {formatMoney(paymentSummary.shippingCostCents)}
+                            ₹ {((paymentSummary.shippingCostCents / 100) * 83).toFixed(2)}
                         </div>
                     </div>
 
                     <div className="payment-summary-row subtotal-row">
                         <div>Total before tax:</div>
                         <div className="payment-summary-money">
-                            {formatMoney(paymentSummary.totalCostBeforeTaxCents)}
+                            ₹ {((paymentSummary.totalCostBeforeTaxCents / 100) * 83).toFixed(2)}
                         </div>
                     </div>
 
                     <div className="payment-summary-row">
                         <div>Estimated tax (10%):</div>
-                        <div className="payment-summary-money">{
-                            formatMoney(paymentSummary.taxCents)}</div>
+                        <div className="payment-summary-money">
+                            ₹ {((paymentSummary.taxCents / 100) * 83).toFixed(2)}
+                        </div>
                     </div>
 
                     <div className="payment-summary-row total-row">
                         <div>Order total:</div>
-                        <div className="payment-summary-money">{formatMoney(paymentSummary.totalCostCents)}</div>
+                        <div className="payment-summary-money">
+                            ₹ {((paymentSummary.totalCostCents / 100) * 83).toFixed(2)}
+                        </div>
                     </div>
 
                     <button className="place-order-button button-primary"

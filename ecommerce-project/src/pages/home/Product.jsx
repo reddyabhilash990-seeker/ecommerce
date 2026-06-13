@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { formatMoney } from "../../utils/money";
+
 import axios from "axios";
+
+
 
 
 
@@ -27,7 +29,7 @@ export function Product({ product, loadCart }) {
 
 
     return (
-        <div className="product-container" 
+        <div className="product-container"
             data-testid="product-container">
             <div className="product-image-container">
                 <img className="product-image"
@@ -50,7 +52,7 @@ export function Product({ product, loadCart }) {
             </div>
 
             <div className="product-price">
-                {formatMoney(product.priceCents)}
+                ₹ {((product.priceCents / 100) * 83).toFixed(2)}
             </div>
 
             <div className="product-quantity-container">

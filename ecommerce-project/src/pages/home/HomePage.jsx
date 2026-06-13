@@ -11,6 +11,7 @@ import './Homepage.css';
 
 export function HomePage({ cart, loadCart }) {
     const[products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     
 
 
@@ -19,6 +20,7 @@ export function HomePage({ cart, loadCart }) {
         const getHomeData = async () => {
             const response = await axios.get('/api/products');
             setProducts(response.data);
+            setFilteredProducts(response.data);
         };
         
 
@@ -32,10 +34,10 @@ export function HomePage({ cart, loadCart }) {
 
         <>
 
-            <Header cart={cart}/>
+            <Header cart={cart} products={products} setFilteredProducts={setFilteredProducts} />
             <title>Ecommerce Project</title>
             <div className="home-page">
-                <ProductsGrid products={products} loadCart={loadCart} />
+                <ProductsGrid products={filteredProducts} loadCart={loadCart} />
             </div>
         </>
 

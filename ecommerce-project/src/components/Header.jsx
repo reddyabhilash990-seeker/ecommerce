@@ -1,27 +1,51 @@
 import { Link } from 'react-router';
 import './header.css';
+import { useState } from 'react';
 
-export function Header({ cart = [] }) {
+export function Header({ cart = [], products = [], setFilteredProducts }) {
     let totalQuantity = 0;
 
-    cart .forEach((cartItem) => {
+    cart.forEach((cartItem) => {
         totalQuantity += cartItem.quantity;
 
     });
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleSearch = () => {
+        const filtered = products.filter((product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        setFilteredProducts(filtered);
+    };
+
+
+
+
+
+
+
 
     return (
+
         <div className="header">
             <div className="left-section">
-                <Link to="/" className="header-link">
+                <Link to="/" className="header-link" onClick={() => setFilteredProducts(products)}>
                     <img className="logo"
                         src='/images/house.png' alt="logo" />
                 </Link>
             </div>
 
             <div className="middle-section">
-                <input className="search-bar" type="text" placeholder="Search" />
+                <input className="search-bar" type="text" placeholder="Search" value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            handleSearch();
+                        }
+                    }} />
 
-                <button className="search-button">
+                <button className="search-button"     onClick={handleSearch}>
                     <img className="search-icon" src="images/icons/search-icon.png" />
                 </button>
             </div>

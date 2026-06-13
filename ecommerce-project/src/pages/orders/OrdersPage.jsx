@@ -1,19 +1,19 @@
 import axios from 'axios';
-import { useState, useEffect,  } from 'react';
+import { useState, useEffect, } from 'react';
 import dayjs from 'dayjs';
 import { Header } from '../../components/header';
-import { formatMoney } from '../../utils/money';
+
 import './OrderPage.css';
 
 
-export function OrdersPage({ cart , loadCart}) {
+export function OrdersPage({ cart, loadCart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
             const response = await axios.get('/api/orders?expand=products');
             setOrders(response.data);
-            
+
         }
         fetchOrders();
     }, []);
@@ -43,7 +43,9 @@ export function OrdersPage({ cart , loadCart}) {
                                         </div>
                                         <div className="order-total">
                                             <div className="order-header-label">Total:</div>
-                                            <div>{formatMoney(order.totalCostCents)}</div>
+                                            <div>
+                                                ₹ {((order.totalCostCents / 100) * 83).toFixed(2)}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -81,6 +83,7 @@ export function OrdersPage({ cart , loadCart}) {
                                                     <div className="product-quantity">
                                                         Quantity: {orderProduct.quantity}
                                                     </div>
+                                                    
                                                     <button className="buy-again-button button-primary" onClick={addToCart}>
                                                         <img className="buy-again-icon" src="images/icons/buy-again.png" />
                                                         <span className="buy-again-message">Add to Cart</span>
@@ -98,14 +101,14 @@ export function OrdersPage({ cart , loadCart}) {
 
                                         );
                                     })}
-                                    
 
-                                    
+
+
                                 </div>
                             </div>
                         );
                     })}
-                    
+
                 </div>
             </div>
         </>
