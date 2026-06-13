@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect, } from 'react';
 import dayjs from 'dayjs';
-import { Header } from '../../components/header';
+import { Header } from '../../components/Header';
 
 import './OrderPage.css';
 
