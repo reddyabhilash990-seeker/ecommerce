@@ -27,6 +27,9 @@ const __dirname = path.dirname(__filename);
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.get('/test', (req, res) => {
+  res.json({ message: 'Backend working' });
+});
 
 // Serve images from the images folder
 app.use('/images', express.static(path.join(__dirname, 'images')));
